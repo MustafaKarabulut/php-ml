@@ -142,23 +142,24 @@ class Matrix
             throw new InvalidArgumentException('Inconsistent matrix supplied');
         }
 
-		$array1 = $this->toArray();
-		$array2 = $matrix->toArray();
-		$colCount = $matrix->columns;
+        $array1 = $this->toArray();
+        $array2 = $matrix->toArray();
+        $colCount = $matrix->columns;
 
-		$product = [];
-		foreach($array1 as $row => $rowData){
-			for($col = 0; $col < $colCount; ++$col) {
-				$columnData = array_column($array2, $col);
-				$sum = 0;
-				foreach($rowData as $key => $valueData) {
-					$sum += $valueData * $columnData[$key];
-				}
-				$product[$row][$col] = $sum;
-			}
-		}
+        $product = [];
+        foreach ($array1 as $row => $rowData) {
+            for ($col = 0; $col < $colCount; ++$col) {
+                $columnData = array_column($array2, $col);
+                $sum = 0;
+                foreach ($rowData as $key => $valueData) {
+                    $sum += $valueData * $columnData[$key];
+                }
 
-		return new self($product, false);
+                $product[$row][$col] = $sum;
+            }
+        }
+
+        return new self($product, false);
     }
 
     public function divideByScalar($value): self
