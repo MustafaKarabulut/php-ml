@@ -146,6 +146,10 @@ class Matrix
         $array2 = $matrix->toArray();
         $colCount = $matrix->columns;
 
+        /*
+         - To speed-up multiplication, we need to avoid use of array index operator [ ] as much as possible( See #255 for details)
+         - A combination of "foreach" and "array_column" works much faster then accessing the array via index operator
+        */
         $product = [];
         foreach ($array1 as $row => $rowData) {
             for ($col = 0; $col < $colCount; ++$col) {
